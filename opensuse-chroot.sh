@@ -77,12 +77,12 @@ install)
                || echo FAIL
           
           echo -n "Downloading tarball from openSUSE"
-          wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
+          busybox wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
                && echo OK \
                || echo FAIL
           
           echo -n "Create disk image at $ROOTDEV"
-          dd if=/dev/zero of=$ROOTDEV bs=1024 count=8388608 status=progress \
+          busybox dd if=/dev/zero of=$ROOTDEV bs=1024 count=8388608 \
                && echo OK \
                || echo FAIL
           
