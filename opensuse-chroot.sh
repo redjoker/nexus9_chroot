@@ -102,6 +102,12 @@ install)
                && echo OK \
                || echo FAIL
 
+          echo -n "Copy graphics script to $ROOT/root/"
+          cp $ROOT/../graphics.sh $ROOT/root/ \
+               && echo OK \
+               || echo FAIL
+               
+
      ;;
 
 *)
