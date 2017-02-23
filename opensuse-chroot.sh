@@ -77,12 +77,12 @@ install)
                || echo FAIL
           
           echo -n "Downloading tarball from openSUSE"
-          busybox wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
+          wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
                && echo OK \
                || echo FAIL
           
           echo -n "Create disk image at $ROOTDEV"
-          busybox dd if=/dev/zero of=$ROOTDEV bs=1024 count=8388608 status=progress \
+          dd if=/dev/zero of=$ROOTDEV bs=1024 count=8388608 status=progress \
                && echo OK \
                || echo FAIL
           
@@ -103,7 +103,7 @@ install)
                || echo FAIL
 
           echo -n "Copy graphics script to $ROOT/root/"
-          cp $ROOT/../graphics.sh $ROOT/root/ \
+          cp $ROOT/../graphics.sh $ROOT/root/graphics.sh \
                && echo OK \
                || echo FAIL
                
