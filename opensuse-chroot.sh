@@ -7,6 +7,7 @@ ROOTMNTOPTS='-t ext4 -o loop'
 ACTION=${1:-start}
 
 case $ACTION in
+
 start)
      ## needs to run once to setup the chroot environment
   
@@ -67,10 +68,46 @@ stop)
                || echo FAIL 
      ;;
 
+
+install)
+     ## get latest rootfs tarball, create disk image, format, extract to image
+          echo -n "Set up directory"
+          mkdir $ROOT \
+               && echo OK \
+               || echo FAIL
+          
+          echo -n "Downloading tarball from openSUSE"
+          busybox wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
+               && echo OK \
+               || echo FAIL
+          
+          echo -n "Create disk image at $ROOTDEV"
+          busybox dd if=/dev/zero of=$ROOTDEV bs=1024 count=8388608 status=progress \
+               && echo OK \
+               || echo FAIL
+          
+          echo -n "Format disk image at $ROOTDEV to ext4"
+          busybox mke2fs -t ext4 $ROOTDEV \
+               && echo OK \
+               || echo FAIL
+               
+          echo -n "Mounting: $ROOTMNTOPTS $ROOTDEV $ROOT"
+          busybox mount $ROOTMNTOPTS $ROOTDEV $ROOT \
+               && echo OK \
+               || echo FAIL
+          
+          echo -n "Extracting tarball to $ROOT"
+          cd $ROOT
+          busybox tar xvjf ../openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 . \
+               && echo OK \
+               || echo FAIL
+
+     ;;
+
 *)
      echo "
 
-Usage: $0 [ start | stop ]
+Usage: $0 [ start | stop | install]
 
 "
      ;;
