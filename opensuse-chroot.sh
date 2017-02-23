@@ -77,7 +77,7 @@ install)
                || echo FAIL
           
           echo -n "Downloading tarball from openSUSE"
-          busybox wget http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
+          curl --metalink http://download.opensuse.org/ports/aarch64/tumbleweed/images/openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tbz.meta4 > openSUSE-Tumbleweed-ARM-XFCE.aarch64-rootfs.aarch64-Current.tar.bz2 \
                && echo OK \
                || echo FAIL
           
